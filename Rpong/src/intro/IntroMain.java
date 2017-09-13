@@ -12,6 +12,8 @@ public class IntroMain {
 		new must be used to call a constructor
 		*/
 		CodingConventions conventionsInstance = new CodingConventions();
+		
+		conventionsInstance.doStuff();
 	}
 
 }

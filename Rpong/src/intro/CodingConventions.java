@@ -19,6 +19,12 @@ public class CodingConventions {
 		description = " is a teacher";
 		
 	}
+
+	public void doStuff() {
+		//static method call
+		System.out.println(name+description);
+		
+	}
 	
 }
 //this is a test.
