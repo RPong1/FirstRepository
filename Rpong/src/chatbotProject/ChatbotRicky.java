@@ -1,5 +1,8 @@
 package chatbotProject;
 
-public class ChatbotRicky {
+public class ChatbotRicky implements Topic {
 
+	public ChatbotRicky() {
+		
+	}
 }

@@ -15,16 +15,17 @@ public class Chatbot {
 	public void startTalking() {
 		ChatbotMain.print("Welcome to our chatbot! What is your name?");
 		userName = ChatbotMain.getInput();
+		chatting = true;
 		while(chatting) {
 			ChatbotMain.print("What do you want to talk about?");
 			String response = ChatbotMain.getInput();
 			if(ricky.isTriggered(response)) {
 				chatting = false;
-				ricky.startChatting();
-			}else {
+				ricky.startChatting(response);
+			}
+			else {
 				ChatbotMain.print("I'm sorry. I don't understand.");
 			}
 		}
 	}
-
 }

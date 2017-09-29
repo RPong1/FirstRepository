@@ -3,6 +3,8 @@ package chatbotProject;
 import java.util.Scanner;
 
 public class ChatbotMain {
+	//static means independent of instances. when program runs, if you want to access the state of the program.For example, lets suppose i code my part and I want to
+	//know what part of the chatbot that the user is operating, you need a handle/identifier. Chatbot is the identifier, you can access it everywhere in the program.
 	
 	public static Chatbot chatbot = new Chatbot();
 
@@ -14,7 +16,6 @@ public class ChatbotMain {
 	private static Scanner inputSource = new Scanner(System.in);
 
 
-	
 	/**
 	 * This method returns the index of keyword in the searchString (after startPsn)
 	 * where keyword is isolated and has noNegations. It returns -1 if the
@@ -122,6 +123,3 @@ public class ChatbotMain {
 	}
 
 }
-
-
-
