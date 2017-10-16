@@ -12,16 +12,10 @@ public class ArraysMain {
 		//populate(intRay);
 		//checkOccurences(intRay,3,18);
 		populate1ToN(intRay);
+		shuffle(intRay);
 		System.out.println(Arrays.toString(intRay));
 	}
 	
-	private void populate1ToN(int[] array) {
-		for(int i = 0; i < array.length; i++) {
-			array[i] = i+1;
-		}
-		
-	}
-
 	private void populate(int[] intRay) {
 		for(int i = 0; i < intRay.length; i++) {
 			intRay[i] = diceRoll(3);
@@ -38,7 +32,24 @@ public class ArraysMain {
 		}
 	}
 
+	private void populate1ToN(int[] array) {
+		for(int i = 0; i < array.length; i++) {
+			array[i] = i+1;
+		}
+	}
 
+	private void swap(int[] array, int i, int j) {
+		int tempNumber = array[i];
+		array[i] = array[j];
+		array[j] = tempNumber;
+	}
+
+	private void shuffle(int[] array) {
+		for(int i = 0; i< array.length;i++) {
+			swap(array,(int)(Math.random()*array.length),(int)(Math.random()*array.length));
+		}
+	}
+	
 	public static void main(String[] args) {
 		ArraysMain arrayPractice = new ArraysMain();
 	}
@@ -60,7 +71,6 @@ public class ArraysMain {
 		
 		//Elements of an array are REFERENCES to objects.
 		//(If you change an element of an array, the REFERENCES changes, not the object)
-		
 		
 		//Two different types of constructors
 			//int[] firstType = {3,0.14,0.00159};
