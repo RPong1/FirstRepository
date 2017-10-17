@@ -12,7 +12,8 @@ public class ArraysMain {
 		//populate(intRay);
 		//checkOccurences(intRay,3,18);
 		populate1ToN(intRay);
-		shuffle(intRay);
+		intRay = reverseOrder(intRay);
+		countLessThan(intRay,50);
 		System.out.println(Arrays.toString(intRay));
 	}
 	
@@ -49,10 +50,6 @@ public class ArraysMain {
 			swap(array,(int)(Math.random()*array.length),(int)(Math.random()*array.length));
 		}
 	}
-	
-	public static void main(String[] args) {
-		ArraysMain arrayPractice = new ArraysMain();
-	}
 
 	public int diceRoll(int numberOfDice) {
 		int roll = 0;
@@ -61,6 +58,29 @@ public class ArraysMain {
 		}
 		return roll;
 	}
+	
+	public int[] reverseOrder(int[] array) {
+		int[] newArray = new int[array.length];
+		for(int i = 0; i < array.length; i++) {
+			newArray[i] = array[array.length - 1 - i];
+		}
+		return newArray;
+	}
+	
+	public int countLessThan(int[] array, int n) {
+		int count = 0;
+		for(int i = 0; i < array.length; i++) {
+			if (array[i] < n) {
+				count++;
+			}
+		}
+		return count;
+	}
+	
+	public static void main(String[] args) {
+		ArraysMain arrayPractice = new ArraysMain();
+	}
+
 	
 	public void notes(){
 		// Arrays are a collection of primitives or objects
