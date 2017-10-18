@@ -8,7 +8,7 @@ public class Person {
 	
 	public static final String[] LAST_START = {"Dav","Ch","L","J","Y","Br"};
 	public static final String[] LAST_MIDDLE = {"id","e","i","am","oung","ow"};
-	public static final String[] LAST_END = {"son"," ","n","es","s","ison"}
+	public static final String[] LAST_END = {"son"," ","n","es","s","ison"};
 	
 	private String firstName;
 	private String lastName;
