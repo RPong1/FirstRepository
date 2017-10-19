@@ -1,14 +1,18 @@
 package Arrays;
 
+import java.util.Arrays;
+
 public class ObjectArrays {
 	
 	public ObjectArrays() {
-		Object[] people  = new Object[20];
+		Person[] people  = new Person[20];
 		populate(people);
-		people[0] = new Thing("coffee maker");
-		for(Object p: people) {
-			System.out.println(p);
+		for(Person p: people) {
+			p.mingle(people);
+			p.printFriends();
+			System.out.println(" ");
 		}
+
 	}
 
 	private void populate(Object[] people) {
@@ -41,4 +45,34 @@ public class ObjectArrays {
 	private String get(String[] a) {
 		return a[(int)(Math.random()*a.length)];
 	}	
+	
+	public Person[] selectGroup(Person[] population, int length) {
+		Person[] subgroup = new Person[length];
+		subgroup[0] = selectAPerson(population);
+		for(int i = 1; i < length; i++) {
+			Person nextPerson = selectAPerson(population);
+			while(PersonInGroup(subgroup, nextPerson)) {
+				nextPerson = selectAPerson(population);
+			}
+			subgroup[i] = nextPerson;
+		}
+		return subgroup;
+	}
+	public static boolean PersonInGroup(Person[] subgroup, Person nextPerson) {
+		for(int i = 0; i < subgroup.length;i++) {
+			if(subgroup[i] == (nextPerson)) {
+				return true;
+			}
+		}
+		return false;
+	}
+
+	private Person selectAPerson(Person[] population) {
+		int randomNum = (int)(Math.random()*population.length);
+		return population[randomNum];
+	}
+	
+	public int countDifferences(Person[] arr1, Person[] arr2) {
+		
+	}
 }
