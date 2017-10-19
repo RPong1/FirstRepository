@@ -72,7 +72,17 @@ public class ObjectArrays {
 		return population[randomNum];
 	}
 	
-	public int countDifferences(Person[] arr1, Person[] arr2) {
+	public double countDifferences(Person[] arr1, Person[] arr2) {
+		double differences = 0;
+		for(int i = 0; i < arr1.length;i++) {
+			if(arr1[i] != arr2[i]) {
+				differences++;
+			}
+		}
+		return differences;
+	}
+	
+	public void testShuffling() {
 		
 	}
 }
