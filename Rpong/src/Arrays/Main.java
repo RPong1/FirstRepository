@@ -43,6 +43,8 @@ public class Main {
 		x = 5;
 		//array = new int[3]; AS LONG AS YOU DONT MAKE A NEW ARRAY,
 		//THE REFERENCES WILL CHANGE
+		//NO 'VOID' METHOD CAN PERMANENTLY CHANGE AN INT
+			//you can if you set it as a return type
 		array[0] = 1;
 		array[1] = 2;
 		array[2] = 3;
