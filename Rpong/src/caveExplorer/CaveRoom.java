@@ -31,20 +31,71 @@ public class CaveRoom {
 		setDirections();
 	}
 
-	public void setDirections(int[] arr) {
+	public void setDirections() {
 		directions = "";
 		boolean doorFound = false;
 		for(int i = 0; i < doors.length; i++) {
 			if(doors[i] != null) {
 				doorFound = true;
-				directions += "\n  There is a "+doors[i].getDescription() + " to "+toDirection(i)+". "+doors[i].getDetails();
+				directions += "\n  There is a "+doors[i].getDescription() +" to "
+				+toDirection(i)+". "+doors[i].getDetails();
 			}
 		}
 		if(!doorFound) {
 			directions += "There is no way out. You are stuck.";
 		}
 	}
+	
+	public void enter(){
+		contents = "X";
+	}
 
+	public void leave() {
+		contents = defaultContents;
+	}
+	
+	public void setConnection(int direction, CaveRoom anotherRoom, Door door){
+		addRoom(direction, anotherRoom, door);
+		anotherRoom.addRoom(oppositeDirection(direction), this, door);
+	}
+	
+	public static int oppositeDirection(int direction) {
+		return (direction + 2) % 4;
+	}
+
+	public void addRoom(int direction, CaveRoom cave, Door door) {
+		borderingRooms[direction] = cave;
+		doors[direction] = door;
+		setDirections();
+	}
+
+	public void interpretInput(String input) {
+		while(isValid(input)) {
+			System.out.println("You can only enter 'w', 'a', 's', 'd'.");
+			input = CaveExplorer.in.nextLine();
+		}
+		String direction ="wdsa";
+		goToRoom(direction.indexOf(input));
+	}
+	
+	public boolean isValid(String input) {
+		String validEntries = "wdsa";
+		return validEntries.indexOf(input) > -1 && input.length() == 1;
+	}
+
+	public void goToRoom(int direction) {
+		if(borderingRooms[direction] != null && doors[direction] != null) {
+			CaveExplorer.currentRoom.leave();
+			CaveExplorer.currentRoom = borderingRooms[direction];
+			CaveExplorer.currentRoom.enter();
+			CaveExplorer.inventory.updateMap();
+		}
+	}
+
+	public static void setUpCaves() {
+		//your group sets up all the caves and all the connections
+	}
+	
 	public static String toDirection(int dir) {
 		String[] directions = {"the North","the East","the South","the West"};
 		return directions[dir];
