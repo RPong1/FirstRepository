@@ -145,6 +145,7 @@ public class CaveRoom {
 		this.defaultContents = defaultContents;
 	}
 
-	
-	
+	public Door getDoor(int direction) {
+		return doors[direction];
+	}
 }
