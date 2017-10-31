@@ -71,11 +71,21 @@ public class CaveRoom {
 
 	public void interpretInput(String input) {
 		while(!isValid(input)) {
-			System.out.println("You can only enter 'w', 'a', 's', 'd'.");
+			printAllowedEntry();
 			input = CaveExplorer.in.nextLine();
 		}
-		String direction ="wdsa";
-		goToRoom(direction.indexOf(input));
+		String direction = validKeys();
+		respondToKeys(direction.indexOf(input));
+	}
+	
+	//override to add more keys, but always include 'wdsa'
+	public String validKeys() {
+		return "wdsa";
+	}
+	
+	//override to print a custom string describing what kets do
+	public void printAllowedEntry() {
+		System.out.println("You can only enter 'w', 'a', 's', 'd'.");
 	}
 	
 	public boolean isValid(String input) {
@@ -84,13 +94,23 @@ public class CaveRoom {
 		return validEntries.indexOf(input) > -1 && input.length() == 1;
 	}
 
-	public void goToRoom(int direction) {
-		if(borderingRooms[direction] != null && doors[direction] != null) {
-			CaveExplorer.currentRoom.leave();
-			CaveExplorer.currentRoom = borderingRooms[direction];
-			CaveExplorer.currentRoom.enter();
-			CaveExplorer.inventory.updateMap();
+	public void respondToKeys(int direction) {
+		if (direction < 4) {
+			if(borderingRooms[direction] != null && doors[direction] != null) {
+				CaveExplorer.currentRoom.leave();
+				CaveExplorer.currentRoom = borderingRooms[direction];
+				CaveExplorer.currentRoom.enter();
+				CaveExplorer.inventory.updateMap();
+			}
+			else {
+				performAction(direction);
+			}
 		}
+	}
+	
+	public void performAction(int direction) {
+		//override to give response to keys other than wasd
+		System.out.println("That key does nothing.");
 	}
 
 	public static void setUpCaves() {
