@@ -1,54 +1,60 @@
 package caveExplorer;
 
 public class NPCRoom extends CaveRoom {
-
-	private NPC presentNPC;
 	
+	private NPC presentNPC;
+
 	public NPCRoom(String description) {
 		super(description);
 		presentNPC = null;
 	}
-
-	public boolean canEnter(){
-		//NPCs can enter a room if no other NPC is already there.
+	
+	/**
+	 * NPCs can enter a room if no other NPC is there
+	 * @return
+	 */
+	public boolean canEnter() {
 		return presentNPC == null;
 	}
 	
-	public void enterNPC(NPC m){
+	public void enterNPC(NPC m) {
 		presentNPC = m;
 	}
 	
-	public void leaveNPC(){
+	public void leaveNPC() {
 		presentNPC = null;
 	}
 	
-	public boolean containsNPC(){
-		// helpful to have this other way of referring to it.
-		// esp, if I decide to change the rules of "canEnter"
+	/**
+	 * there is already a method like this, but to me it is helpful
+	 * to have this other way of referring to it, ESPECIALLY
+	 * if I decide to change the rules of "canEnter"
+	 * @return
+	 */
+	public boolean containsNPC() {
 		return presentNPC != null;
 	}
 	
-	// above,  new features to CaveRoom.
-	// below, replace CaveRoom methods (override)
+	//The above methods are nNEW features to a CaveRoom,
+	//the methods below REPLACE CaveRoom methods(overide)
 	
 	public String validKeys() {
 		return "wdsae";
 	}
 	
 	public void printAllowedEntry() {
-		CaveExplorer.print("You can only enter 'w', 'a', 's', or 'd' to more or you can type 'e' to interact");
+		CaveExplorer.print("You can only enter 'w', 'a', 's', or 'd' to move or"
+				+ "you can type 'e' to interact.");
 	}
 	
 	public void performAction(int direction) {
 		if(direction == 4) {
 			if(containsNPC() && presentNPC.isActive()) {
 				presentNPC.interact();
+			}else {
+				CaveExplorer.print("There is nothing to interact with");
 			}
-			else {
-				CaveExplorer.print("There is nothing to interact with.");
-			}
-		}
-		else {
+		}else {
 			CaveExplorer.print("That key does nothing.");
 		}
 	}
@@ -56,18 +62,21 @@ public class NPCRoom extends CaveRoom {
 	public String getContents() {
 		if(containsNPC() && presentNPC.isActive()) {
 			return "M";
-		}
-		else {
+		}else {
+			//return what would be returned otherwise
 			return super.getContents();
 		}
 	}
 	
 	public String getDescription() {
 		if(containsNPC() && !presentNPC.isActive()) {
-			return super.getDescription()+"\n"+presentNPC.getInactiveDescription();
-		}
-		else {
-			return super.getDescription() + "\n" + presentNPC.getActiveDescription();
+			return super.getDescription() + "\n" + presentNPC.getInactiveDescription();
+		}else {
+			String npcDesc = "";
+			if(presentNPC != null) {
+				npcDesc = presentNPC.getActiveDescription();
+			}
+			return super.getDescription() + "\n" + npcDesc;
 		}
 	}
 }
