@@ -3,7 +3,8 @@ package Arrays2D;
 public class Main {
 
 	public static void main(String[] args) {
-		judgeCircle("DURDLDRRLL");
+		System.out.print(reverseString("hello"));
+		
 		
 	}
 
@@ -29,5 +30,14 @@ public class Main {
         }
         System.out.println("L: "+ l + " R: " + r + " D: " + d + " U: " + u);
         return ((l == r) && (d == u));
+    }
+	
+	public static String reverseString(String s) {
+        String str = "";
+        for(int i = s.length(); i >= 1; i--){
+        	System.out.println(s.substring(i-1, i));
+        	str += s.substring(i-1,i);
+        }
+        return str;
     }
 }
